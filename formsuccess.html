@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission Successful</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .loader-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            display: none; /* Initially hidden */
+        }
+        .message h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .message p {
+            font-size: 1.2em;
+        }
+        .timer {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+
+    <div class="message">
+        <h1>Form Submitted Successfully</h1>
+        <p>Thank you for submitting the form.</p>
+        <p class="timer">You will be redirected to the home page in <span id="countdown">5</span> seconds.</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.querySelector('.loader-container').style.display = 'none';
+                document.querySelector('.message').style.display = 'block';
+                startCountdown();
+            }, 2000); // Display loader for 2 seconds
+        });
+
+        function startCountdown() {
+            let countdownElement = document.getElementById('countdown');
+            let countdown = 5;
+
+            function updateCountdown() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                if (countdown === 0) {
+                    window.location.href = 'index.html'; // Change 'index.html' to your homepage URL
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+        }
+    </script>
+</body>
+</html>
